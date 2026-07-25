@@ -18,6 +18,11 @@ def analyze_page(url: str):
         2
     )
 
+    content_type = response.headers.get("content-type", "")
+
+    if "text/html" not in content_type.lower():
+        raise ValueError("The URL does not point to an HTML page.")
+
     soup = BeautifulSoup(response.text, "html.parser")
 
     title = (
