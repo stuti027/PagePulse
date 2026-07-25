@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PagePulse</title>
+
+    <meta
+        name="description"
+        content="Analyze webpage performance, structure and accessibility essentials."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="/" class="logo">
+            PagePulse<span>.</span>
+        </a>
+
+        <span class="header-label">Webpage analyzer</span>
+    </header>
+
+
+    <main>
+
+        <section class="hero">
+
+            <h1>
+                See what's under<br>
+                the <span class="accent">surface.</span>
+            </h1>
+
+            <p class="hero-description">
+                Analyze any webpage for performance,
+                structure and accessibility essentials.
+            </p>
+
+
+            <form id="analyze-form" class="analyzer">
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="url"
+                        id="url-input"
+                        placeholder="https://example.com"
+                        autocomplete="url"
+                        required
+                    >
+
+                    <button id="analyze-button" type="submit">
+                        <span class="button-text">Analyze</span>
+                        <span class="arrow">↗</span>
+                    </button>
+
+                    <div class="pulse-track">
+                        <div class="pulse"></div>
+                    </div>
+
+                </div>
+
+            </form>
+
+            <p id="error-message" class="error"></p>
+
+        </section>
+
+        <section id="results" class="results hidden">
+
+            <div class="result-heading">
+
+                <div>
+                    <span class="result-label">PAGE ANALYSIS</span>
+                    <h2 id="analyzed-url">Webpage report</h2>
+                </div>
+
+                <div class="status">
+                    <span class="status-dot"></span>
+                    <span id="status-code">—</span>
+                </div>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+            <div class="metrics">
+
+                <div class="metric">
+                    <strong id="response-time">—</strong>
+                    <span>Response time</span>
+                </div>
+
+                <div class="metric">
+                    <strong id="h1-count">—</strong>
+                    <span>H1 headings</span>
+                </div>
+
+                <div class="metric">
+                    <strong id="missing-alt">—</strong>
+                    <span>Missing alt</span>
+                </div>
+
+                <div class="metric">
+                    <strong id="word-count">—</strong>
+                    <span>Words</span>
+                </div>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+            <div class="details">
+
+                <div class="detail">
+                    <span>PAGE TITLE</span>
+                    <p id="page-title">—</p>
+                </div>
+
+                <div class="detail">
+                    <span>META DESCRIPTION</span>
+                    <p id="meta-description">—</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <span>PagePulse.</span>
+
+        <a
+            href="https://digitalheroes.co"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Built for Digital Heroes Training Task
+        </a>
+
+    </footer>
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>

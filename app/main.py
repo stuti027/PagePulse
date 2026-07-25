@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import HttpUrl
 import httpx
 
@@ -7,10 +9,16 @@ from app.services.analyzer import analyze_page
 
 app = FastAPI(title="Page Pulse API")
 
+app.mount(
+    "/static",
+    StaticFiles(directory="app/static"),
+    name="static"
+)
+
 
 @app.get("/")
 def home():
-    return {"message": "Page Pulse API is running"}
+    return FileResponse("app/static/index.html")
 
 
 @app.get("/analyze")
