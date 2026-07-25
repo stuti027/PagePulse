@@ -4,26 +4,8 @@ import httpx
 from bs4 import BeautifulSoup
 
 
-def analyze_page(url: str):
-    start_time = time.perf_counter()
-
-    response = httpx.get(
-        url,
-        follow_redirects=True,
-        timeout=10.0
-    )
-
-    response_time = round(
-        (time.perf_counter() - start_time) * 1000,
-        2
-    )
-
-    content_type = response.headers.get("content-type", "")
-
-    if "text/html" not in content_type.lower():
-        raise ValueError("The URL does not point to an HTML page.")
-
-    soup = BeautifulSoup(response.text, "html.parser")
+def parse_html(html: str):
+    soup = BeautifulSoup(html, "html.parser")
 
     title = (
         soup.title.string.strip()
@@ -54,12 +36,38 @@ def analyze_page(url: str):
     word_count = len(text.split())
 
     return {
-        "url": str(response.url),
-        "status_code": response.status_code,
-        "response_time_ms": response_time,
         "title": title,
         "meta_description": meta_description,
         "h1_count": h1_count,
         "images_missing_alt": images_missing_alt,
         "word_count": word_count,
+    }
+
+
+def analyze_page(url: str):
+    start_time = time.perf_counter()
+
+    response = httpx.get(
+        url,
+        follow_redirects=True,
+        timeout=10.0
+    )
+
+    response_time = round(
+        (time.perf_counter() - start_time) * 1000,
+        2
+    )
+
+    content_type = response.headers.get("content-type", "")
+
+    if "text/html" not in content_type.lower():
+        raise ValueError("The URL does not point to an HTML page.")
+
+    page_data = parse_html(response.text)
+
+    return {
+        "url": str(response.url),
+        "status_code": response.status_code,
+        "response_time_ms": response_time,
+        **page_data,
     }
